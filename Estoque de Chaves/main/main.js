@@ -2,12 +2,11 @@ class chave{
     constructor(nome, quantidade){
         this.nome=nome
         this.quantidade=quantidade
-        return chave
     }
-    getNome(){
+    get getNome(){
         return this.nome
     }
-    getQuantidade(){
+    get getQuantidade(){
         return this.quantidade
     }
 }
@@ -16,23 +15,23 @@ const form = document.getElementById("newChaveForm");
 
 form.addEventListener("submit", function e(event){
     event.preventDefault()
-    console.log("formData")
-});
-
-//const newChave = new chave(document.getElementById("nomeForm").value, document.getElementById("quantidadeForm").value)
-
-/*function createChave(){
 
     const newChaveNome = document.getElementById("nomeForm").value
     const newChaveQuantidade = document.getElementById("quantidadeForm").value
+    const newChave = new chave(newChaveNome, newChaveQuantidade)
 
-    console.log(newChaveNome)
+    console.log(newChave.getNome)
+});
 
-    const chaveForm = new chave(newChaveNome, newChaveQuantidade)
+/*function createChave(){
+    const newChaveNome = document.getElementById("nomeForm").value
+    const newChaveQuantidade = document.getElementById("quantidadeForm").value
+
+    const newChave = new chave(newChaveNome, newChaveQuantidade)
 
     console.log(chaveForm)
 
-    return chaveForm
+    return newChave
 }*/
 
 
