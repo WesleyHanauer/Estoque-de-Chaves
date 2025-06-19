@@ -20,7 +20,14 @@ form.addEventListener("submit", function e(event){
     const newChaveQuantidade = document.getElementById("quantidadeForm").value
     const newChave = new chave(newChaveNome, newChaveQuantidade)
 
-    console.log(newChave.getNome)
+    const stringChave = JSON.stringify(newChave)
+
+    localStorage.setItem("chaves", stringChave)
+
+    const storedData = localStorage.getItem("chaves");
+    const loadedStock = storedData ? JSON.parse(storedData) : {};
+
+    console.log(loadedStock)
 });
 
 /*function createChave(){
@@ -35,8 +42,8 @@ form.addEventListener("submit", function e(event){
 }*/
 
 
-function readChave(){
-
+function readChave(chave){
+    return this.chave
 }
 
 function updateChave(){
