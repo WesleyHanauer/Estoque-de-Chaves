@@ -1,0 +1,1 @@
+Super simple serverless stock keeping app designed specifically at my grandmother`s request, currently being developed daily by myself and expected to be finished in the next couple of weeks/months. I will gladly use this as experience in building reliable software and I hope this product fits her needs.
