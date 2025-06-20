@@ -25,21 +25,25 @@ if(localStorage.getItem(0)!=null){
     for (let i = 0; localStorage.getItem(i) != null; i++) {
         storedData[i] = localStorage.getItem(i);
         loadedChave[i] = storedData[i] ? JSON.parse(storedData[i]) : {};
+        console.log(loadedChave)
     }
-    console.log(loadedChave)
 }
 
 form.addEventListener("submit", function e(event){
     event.preventDefault()
-    const newChaveId = 0
-    for (let i = 0; localStorage.getItem(i) != null; i++) {
-        if(i > 0 && localStorage.getItem(i)==null){
-            newChaveId = i-1
-        }
+    let newChaveId = 0
+    const storedData = []
+    const loadedChave = []
+    for (let i = 0; localStorage.getItem(i)!=null; i++) {
+        newChaveId = i
+        //storedData[i] = localStorage.getItem(i);
+        //loadedChave[i] = storedData[i] ? JSON.parse(storedData[i]) : {};
+        //if(localStorage.getItem(i+1)==null){
+        //}
     }
     const newChave = createChave(newChaveId, document.getElementById("nomeForm").value, document.getElementById("quantidadeForm").value)
     const stringChave = JSON.stringify(newChave)
-    localStorage.setItem(newChaveId, stringChave)
+    localStorage.setItem(5, stringChave)
 });
 
 function createChave(id, newChaveNome, newChaveQuantidade){
