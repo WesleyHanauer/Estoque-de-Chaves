@@ -25,6 +25,7 @@ if(localStorage.getItem(0)!=null){
     for (let i = 0; localStorage.getItem(i) != null; i++) {
         const storedData = localStorage.getItem(i);
         const loadedChave = storedData ? JSON.parse(storedData) : {};
+        console.log(loadedChave)
     }
 }
 
@@ -52,5 +53,6 @@ function deleteChave(){
 
 }
 
-    const storedData = localStorage.getItem(0);
-    const loadedStock = storedData ? JSON.parse(storedData) : {};
+    //const storedData = localStorage.getItem(0);
+    //const loadedStock = storedData ? JSON.parse(storedData) : {};
+    //localStorage.clear()
