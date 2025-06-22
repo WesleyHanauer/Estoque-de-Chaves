@@ -57,7 +57,7 @@ form.addEventListener("submit", function e(event){
         console.log(i)
     }
 
-    const newChave = createChave(newChaveId, document.getElementById("nomeForm").value, document.getElementById("quantidadeForm").value)
+    const newChave = new chave(newChaveId, document.getElementById("nomeForm").value, document.getElementById("quantidadeForm").value)
     const stringChave = JSON.stringify(newChave)
     localStorage.setItem(newChaveId, stringChave)
 });
