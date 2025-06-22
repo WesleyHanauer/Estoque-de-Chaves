@@ -41,21 +41,10 @@ if(localStorage.getItem(0)!=null){
         bodyRow.appendChild(bodyCol1)
         bodyRow.appendChild(bodyCol2)
         table.appendChild(bodyRow)
-        //console.log(loadedChave.getId)
     }
 }
 
 table.appendChild(headRow)
-
-//nomeTH.innerText = "Chave"
-//quantidadeTH.innerText = "Quantidade"
-
-//table.append(headrow)
-//table.append(bodyrow)
-//bodyrow.append(nomeTH)
-//bodyrow.append(quantidadeTH)
-
-
 document.body.append(table);
 
 const form = document.getElementById("newChaveForm")
@@ -68,15 +57,10 @@ form.addEventListener("submit", function e(event){
         console.log(i)
     }
 
-
     const newChave = createChave(newChaveId, document.getElementById("nomeForm").value, document.getElementById("quantidadeForm").value)
     const stringChave = JSON.stringify(newChave)
     localStorage.setItem(newChaveId, stringChave)
 });
-
-function createChave(id, newChaveNome, newChaveQuantidade){
-    return newChave = new chave(id, newChaveNome, newChaveQuantidade)
-}
 
 function updateChave(){
 
@@ -85,6 +69,3 @@ function updateChave(){
 function deleteChave(){
 
 }
-
-    //const storedData = localStorage.getItem(0);
-    //const loadedStock = storedData ? JSON.parse(storedData) : {};
