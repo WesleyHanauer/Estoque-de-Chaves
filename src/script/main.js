@@ -31,6 +31,7 @@ headRow.appendChild(headCol2)
 table.appendChild(headRow)
 const bodyCol1 = []
 const bodyCol2 = []
+var selectedChaveId = null
 if(localStorage.getItem(0)!=null){
     for (let i = 0; localStorage.getItem(i) != null; i++) {
         const storedData = localStorage.getItem(i);
@@ -45,12 +46,12 @@ if(localStorage.getItem(0)!=null){
         bodyRow.appendChild(bodyCol2[i])
         table.appendChild(bodyRow)
         bodyCol1[i].addEventListener("click", function e(event){
-            const selectedChaveId = loadedChave.getId
-            //console.log(selectedChaveId)
+            selectedChaveId = loadedChave.getId
+            console.log(selectedChaveId)
         })
         bodyCol2[i].addEventListener("click", function e(event){
-            const selectedChaveId = loadedChave.getId
-            //console.log(selectedChaveId)
+            selectedChaveId = loadedChave.getId
+            console.log(selectedChaveId)
         })
         /*document.body.addEventListener("click", function e(event){
             const selectedChaveId = null
@@ -60,9 +61,9 @@ if(localStorage.getItem(0)!=null){
 }
 document.body.append(table);
 
-const form = document.getElementById("newChaveForm")
+const confirmarButton = document.getElementById("confirmarButton")
 
-form.addEventListener("submit", function e(event){
+confirmarButton.addEventListener("click", function e(event){
     //event.preventDefault()
     let newChaveId = 0
     for (let i = 0; localStorage.getItem(i)!=null; i++) {
@@ -76,7 +77,20 @@ form.addEventListener("submit", function e(event){
     }else{
         alert("Nome e quantidade devem estar prenchidos!");
     }
-    
+})
+
+const deletarButton = document.getElementById("deletarButton")
+
+deletarButton.addEventListener("click", function e(event){
+    console.log(selectedChaveId)
+    for (let i = 0; localStorage.getItem(i) != null; i++) {
+        const storedData = localStorage.getItem(i);
+        const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
+        const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
+        if(loadedChave.getId=selectedChaveId){
+            localStorage.removeItem(selectedChaveId)
+        }
+    }
 })
 
 function updateChave(){
