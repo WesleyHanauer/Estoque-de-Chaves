@@ -24,10 +24,13 @@ const headRow = document.createElement("tr")
 const headCol1 = document.createElement("th")
 const headCol2 = document.createElement("th")
 headRow.setAttribute("colspan", "2");
-headCol1.innerText = "Quantidade"
-headCol2.innerText = "Chaves"
+headCol1.innerText = "Chave"
+headCol2.innerText = "Quantidade"
 headRow.appendChild(headCol1)
 headRow.appendChild(headCol2)
+table.appendChild(headRow)
+const bodyCol1 = []
+const bodyCol2 = []
 
 if(localStorage.getItem(0)!=null){
     for (let i = 0; localStorage.getItem(i) != null; i++) {
@@ -35,17 +38,21 @@ if(localStorage.getItem(0)!=null){
         const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
         const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
         const bodyRow = document.createElement("tr")
-        const bodyCol1 = document.createElement("th")
-        const bodyCol2 = document.createElement("th")
-        bodyCol1.innerText = loadedChave.getNome
-        bodyCol2.innerText = loadedChave.getQuantidade
-        bodyRow.appendChild(bodyCol1)
-        bodyRow.appendChild(bodyCol2)
+        bodyCol1[i] = document.createElement("th")
+        bodyCol2[i] = document.createElement("th")
+        bodyCol1[i].innerText = loadedChave.getNome
+        bodyCol2[i].innerText = loadedChave.getQuantidade
+        bodyRow.appendChild(bodyCol1[i])
+        bodyRow.appendChild(bodyCol2[i])
         table.appendChild(bodyRow)
+        console.log(bodyCol1)
     }
 }
 
-table.appendChild(headRow)
+table.addEventListener("click", function e(event){
+    console.log()
+})
+
 document.body.append(table);
 
 const form = document.getElementById("newChaveForm")
@@ -61,7 +68,7 @@ form.addEventListener("submit", function e(event){
     const newChave = new chave(newChaveId, document.getElementById("nomeForm").value, document.getElementById("quantidadeForm").value)
     const stringChave = JSON.stringify(newChave)
     localStorage.setItem(newChaveId, stringChave)
-});
+})
 
 function updateChave(){
 
