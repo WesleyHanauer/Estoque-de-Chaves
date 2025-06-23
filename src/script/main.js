@@ -16,6 +16,7 @@ class chave{
 }
 
 //localStorage.clear()
+
 console.log(localStorage.length)
 
 const table = document.createElement("table")
