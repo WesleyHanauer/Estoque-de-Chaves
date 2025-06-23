@@ -31,7 +31,6 @@ headRow.appendChild(headCol2)
 table.appendChild(headRow)
 const bodyCol1 = []
 const bodyCol2 = []
-
 if(localStorage.getItem(0)!=null){
     for (let i = 0; localStorage.getItem(i) != null; i++) {
         const storedData = localStorage.getItem(i);
@@ -45,14 +44,20 @@ if(localStorage.getItem(0)!=null){
         bodyRow.appendChild(bodyCol1[i])
         bodyRow.appendChild(bodyCol2[i])
         table.appendChild(bodyRow)
-        console.log(bodyCol1)
+        bodyCol1[i].addEventListener("click", function e(event){
+            const selectedChaveId = loadedChave.getId
+            //console.log(selectedChaveId)
+        })
+        bodyCol2[i].addEventListener("click", function e(event){
+            const selectedChaveId = loadedChave.getId
+            //console.log(selectedChaveId)
+        })
+        /*document.body.addEventListener("click", function e(event){
+            const selectedChaveId = null
+            console.log("null")
+        })*/
     }
 }
-
-table.addEventListener("click", function e(event){
-    console.log()
-})
-
 document.body.append(table);
 
 const form = document.getElementById("newChaveForm")
