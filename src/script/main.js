@@ -69,10 +69,14 @@ form.addEventListener("submit", function e(event){
         newChaveId++
         console.log(i)
     }
-
-    const newChave = new chave(newChaveId, document.getElementById("nomeForm").value, document.getElementById("quantidadeForm").value)
-    const stringChave = JSON.stringify(newChave)
-    localStorage.setItem(newChaveId, stringChave)
+    if(document.getElementById("nomeForm").value!="" && document.getElementById("quantidadeForm").value !=""){
+        const newChave = new chave(newChaveId, document.getElementById("nomeForm").value, document.getElementById("quantidadeForm").value)
+        const stringChave = JSON.stringify(newChave)
+        localStorage.setItem(newChaveId, stringChave)
+    }else{
+        alert("Nome e quantidade devem estar prenchidos!");
+    }
+    
 })
 
 function updateChave(){
