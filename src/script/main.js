@@ -15,9 +15,12 @@ class chave{
     }
 }
 
-//localStorage.clear()
-
 console.log(localStorage.length)
+
+document.getElementById("clearButton").addEventListener("click", function e(event){
+    location.reload()
+    localStorage.clear()
+})
 
 const table = document.createElement("table")
 const headRow = document.createElement("tr")
