@@ -33,30 +33,36 @@ const bodyCol1 = []
 const bodyCol2 = []
 var selectedChaveId = null
 if(localStorage.getItem(0)!=null){
-    for (let i = 0; localStorage.getItem(i) != null; i++) {
+    var forStartingIndex =localStorage.length
+    for (let i = 0; i < forStartingIndex; i++) {
         const storedData = localStorage.getItem(i);
         const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
         const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
-        const bodyRow = document.createElement("tr")
-        bodyCol1[i] = document.createElement("th")
-        bodyCol2[i] = document.createElement("th")
-        bodyCol1[i].innerText = loadedChave.getNome
-        bodyCol2[i].innerText = loadedChave.getQuantidade
-        bodyRow.appendChild(bodyCol1[i])
-        bodyRow.appendChild(bodyCol2[i])
-        table.appendChild(bodyRow)
-        bodyCol1[i].addEventListener("click", function e(event){
-            selectedChaveId = loadedChave.getId
-            console.log(selectedChaveId)
-        })
-        bodyCol2[i].addEventListener("click", function e(event){
-            selectedChaveId = loadedChave.getId
-            console.log(selectedChaveId)
-        })
-        /*document.body.addEventListener("click", function e(event){
-            const selectedChaveId = null
-            console.log("null")
-        })*/
+        if(loadedChave.getId!=i){
+            forStartingIndex++
+        }else{
+            const bodyRow = document.createElement("tr")
+            bodyCol1[i] = document.createElement("th")
+            bodyCol2[i] = document.createElement("th")
+            bodyCol1[i].innerText = loadedChave.getNome
+            bodyCol2[i].innerText = loadedChave.getQuantidade
+            bodyRow.appendChild(bodyCol1[i])
+            bodyRow.appendChild(bodyCol2[i])
+            table.appendChild(bodyRow)
+            bodyCol1[i].addEventListener("click", function e(event){
+                selectedChaveId = loadedChave.getId
+                console.log(selectedChaveId)
+            })
+            bodyCol2[i].addEventListener("click", function e(event){
+                selectedChaveId = loadedChave.getId
+                console.log(selectedChaveId)
+            })
+            /*document.body.addEventListener("click", function e(event){
+                const selectedChaveId = null
+                console.log("null")
+            })*/
+        }
+        
     }
 }
 document.body.append(table);
@@ -67,8 +73,12 @@ confirmarButton.addEventListener("click", function e(event){
     //event.preventDefault()
     let newChaveId = 0
     for (let i = 0; localStorage.getItem(i)!=null; i++) {
-        newChaveId++
-        console.log(i)
+        const storedData = localStorage.getItem(i);
+        const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
+        const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
+        if(loadedChave.getId==i){
+            newChaveId++
+        }
     }
     if(document.getElementById("nomeForm").value!="" && document.getElementById("quantidadeForm").value !=""){
         const newChave = new chave(newChaveId, document.getElementById("nomeForm").value, document.getElementById("quantidadeForm").value)
