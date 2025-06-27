@@ -93,26 +93,15 @@ confirmarButton.addEventListener("click", function e(event){
 const deletarButton = document.getElementById("deletarButton")
 
 deletarButton.addEventListener("click", function e(event){
-    for (let i = 1; i<localStorage.length; i++) {
-        const storedData = localStorage.getItem(i);
-        const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
-        const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
-        if(loadedChave.getId=selectedChaveId){
-            localStorage.removeItem(selectedChaveId)
-        }
-    }
+    localStorage.removeItem(selectedChaveId)
 })
 
 const atualizarButton = document.getElementById("atualizarButton")
 
 atualizarButton.addEventListener("click", function e(event){
-    for (let i = 1; i<localStorage.length; i++) {
-            const storedData = localStorage.getItem(i);
-            const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
-            const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
-            if(i == selectedChaveId){ 
-                loadedChave.quantidade = document.getElementById("quantidadeForm").value
-                localStorage.setItem(selectedChaveId, JSON.stringify(loadedChave))
-            }
-    }
+    const storedData = localStorage.getItem(selectedChaveId);
+    const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
+    const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
+    loadedChave.quantidade = document.getElementById("quantidadeForm").value
+    localStorage.setItem(selectedChaveId, JSON.stringify(loadedChave))
 })
