@@ -17,7 +17,6 @@ class chave{
 
 document.getElementById("clearButton").addEventListener("click", function e(event){
     localStorage.clear()
-    location.reload()
 })
 
 const table = document.createElement("table")
@@ -99,8 +98,6 @@ deletarButton.addEventListener("click", function e(event){
         const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
         const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
         if(loadedChave.getId=selectedChaveId){
-            console.log(selectedChaveId)
-            console.log(loadedChave.getId)
             localStorage.removeItem(selectedChaveId)
         }
     }
@@ -109,14 +106,13 @@ deletarButton.addEventListener("click", function e(event){
 const atualizarButton = document.getElementById("atualizarButton")
 
 atualizarButton.addEventListener("click", function e(event){
-    for (let i = 1; localStorage.getItem(i) != null; i++) {
+    for (let i = 1; i<localStorage.length; i++) {
             const storedData = localStorage.getItem(i);
             const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
             const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
-            if(loadedChave.getId=selectedChaveId){ 
+            if(i == selectedChaveId){ 
                 loadedChave.quantidade = document.getElementById("quantidadeForm").value
-                localStorage.setItem(loadedChaveString.id, JSON.stringify(loadedChave))
-                location.reload()
-            }else{}
+                localStorage.setItem(selectedChaveId, JSON.stringify(loadedChave))
+            }
     }
 })
