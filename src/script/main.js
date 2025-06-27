@@ -93,7 +93,12 @@ confirmarButton.addEventListener("click", function e(event){
 const deletarButton = document.getElementById("deletarButton")
 
 deletarButton.addEventListener("click", function e(event){
-    localStorage.removeItem(selectedChaveId)
+    const storedData = localStorage.getItem(selectedChaveId);
+    const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
+    const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
+    if(confirm("Tem certeza que deseja deletar a chave "+loadedChave.getNome+"?")){
+        localStorage.removeItem(selectedChaveId)
+    }
 })
 
 const atualizarButton = document.getElementById("atualizarButton")
