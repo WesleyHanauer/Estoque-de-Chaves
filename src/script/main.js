@@ -15,11 +15,9 @@ class chave{
     }
 }
 
-console.log(localStorage.length)
-
 document.getElementById("clearButton").addEventListener("click", function e(event){
-    location.reload()
     localStorage.clear()
+    location.reload()
 })
 
 const table = document.createElement("table")
@@ -36,8 +34,8 @@ const bodyCol1 = []
 const bodyCol2 = []
 var selectedChaveId = null
 if(localStorage.getItem(0)!=null){
-    var forStartingIndex =localStorage.length
-    for (let i = 0; i < forStartingIndex; i++) {
+    var forStartingIndex = localStorage.length
+    for (let i = 1; i < forStartingIndex; i++) {
         const storedData = localStorage.getItem(i);
         const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
         const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
@@ -54,28 +52,29 @@ if(localStorage.getItem(0)!=null){
             table.appendChild(bodyRow)
             bodyCol1[i].addEventListener("click", function e(event){
                 selectedChaveId = loadedChave.getId
-                console.log(selectedChaveId)
             })
             bodyCol2[i].addEventListener("click", function e(event){
                 selectedChaveId = loadedChave.getId
-                console.log(selectedChaveId)
+                console.log(loadedChave.getId)
             })
             /*document.body.addEventListener("click", function e(event){
                 const selectedChaveId = null
-                console.log("null")
             })*/
         }
         
     }
+}else{
+    localStorage.setItem(0, "placeholder")    
 }
+
 document.body.append(table);
 
 const confirmarButton = document.getElementById("confirmarButton")
 
 confirmarButton.addEventListener("click", function e(event){
     //event.preventDefault()
-    let newChaveId = 0
-    for (let i = 0; localStorage.getItem(i)!=null; i++) {
+    let newChaveId = 1
+    for (let i = 1; localStorage.getItem(i)!=null; i++) {
         const storedData = localStorage.getItem(i);
         const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
         const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
@@ -95,21 +94,29 @@ confirmarButton.addEventListener("click", function e(event){
 const deletarButton = document.getElementById("deletarButton")
 
 deletarButton.addEventListener("click", function e(event){
-    console.log(selectedChaveId)
-    for (let i = 0; localStorage.getItem(i) != null; i++) {
+    for (let i = 1; i<localStorage.length; i++) {
         const storedData = localStorage.getItem(i);
         const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
         const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
         if(loadedChave.getId=selectedChaveId){
+            console.log(selectedChaveId)
+            console.log(loadedChave.getId)
             localStorage.removeItem(selectedChaveId)
         }
     }
 })
 
-function updateChave(){
+const atualizarButton = document.getElementById("atualizarButton")
 
-}
-
-function deleteChave(){
-
-}
+atualizarButton.addEventListener("click", function e(event){
+    for (let i = 1; localStorage.getItem(i) != null; i++) {
+            const storedData = localStorage.getItem(i);
+            const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
+            const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
+            if(loadedChave.getId=selectedChaveId){ 
+                loadedChave.quantidade = document.getElementById("quantidadeForm").value
+                localStorage.setItem(loadedChaveString.id, JSON.stringify(loadedChave))
+                location.reload()
+            }else{}
+    }
+})
