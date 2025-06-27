@@ -66,7 +66,7 @@ if(localStorage.getItem(0)!=null){
     localStorage.setItem(0, "placeholder")    
 }
 
-document.body.append(table);
+document.getElementById("dashboard").append(table);
 
 const confirmarButton = document.getElementById("confirmarButton")
 

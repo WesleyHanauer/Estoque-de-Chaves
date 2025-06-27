@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+aside {
+    width: 40%;
+    padding-left: 0.5rem;
+    margin-left: 0.5rem;
+    float: right;
+}
+form, input, button{
+    display: block;
+    justify-content: center;
+}
+#dashboard{
+    width: 60%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
