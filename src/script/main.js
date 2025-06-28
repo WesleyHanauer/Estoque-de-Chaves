@@ -23,7 +23,7 @@ const table = document.createElement("table")
 const headRow = document.createElement("tr")
 const headCol1 = document.createElement("th")
 const headCol2 = document.createElement("th")
-headRow.setAttribute("colspan", "2");
+headRow.setAttribute("colspan", "2")
 headCol1.innerText = "Chave"
 headCol2.innerText = "Quantidade"
 headRow.appendChild(headCol1)
@@ -34,8 +34,8 @@ const bodyCol2 = []
 var selectedChaveId = 0
 if(localStorage.getItem(0)!=null){
     var forStartingIndex = localStorage.length
-    for (let i = 1; i < forStartingIndex; i++) {
-        const storedData = localStorage.getItem(i);
+    for (let i = 1; i < forStartingIndex; i++){
+        const storedData = localStorage.getItem(i)
         const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
         const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
         if(loadedChave.getId!=i){
@@ -51,11 +51,9 @@ if(localStorage.getItem(0)!=null){
             table.appendChild(bodyRow)
             bodyCol1[i].addEventListener("click", function e(event){
                 selectedChaveId = loadedChave.getId
-                console.log(selectedChaveId)
             })
             bodyCol2[i].addEventListener("click", function e(event){
                 selectedChaveId = loadedChave.getId
-                console.log(selectedChaveId)
             })
         }
         
@@ -64,20 +62,19 @@ if(localStorage.getItem(0)!=null){
     localStorage.setItem(0, null)    
 }
 
-document.getElementById("dashboard").append(table);
+document.getElementById("dashboard").append(table)
 
-document.body.addEventListener("click", function e(event){
+/*document.body.addEventListener("click", function e(event){
     selectedChaveId = 0
     console.log(selectedChaveId)
-})
+})*/
 
 const confirmarButton = document.getElementById("confirmarButton")
 
 confirmarButton.addEventListener("click", function e(event){
-    //event.preventDefault()
     let newChaveId = 1
     for (let i = 1; localStorage.getItem(i)!=null; i++) {
-        const storedData = localStorage.getItem(i);
+        const storedData = localStorage.getItem(i)
         const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
         const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
         if(loadedChave.getId==i){
@@ -89,31 +86,29 @@ confirmarButton.addEventListener("click", function e(event){
         const stringChave = JSON.stringify(newChave)
         localStorage.setItem(newChaveId, stringChave)
     }else{
-        alert("Nome e quantidade devem estar prenchidos!");
+        alert("Nome e quantidade devem estar prenchidos!")
     }
 })
 
-const deletarButton = document.getElementById("deletarButton")
-
-deletarButton.addEventListener("click", function e(event){
+document.getElementById("deletarButton").addEventListener("click", function e(event){
     if(selectedChaveId!=0){
-        const storedData = localStorage.getItem(selectedChaveId);
+        const storedData = localStorage.getItem(selectedChaveId)
         const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
         const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
         if(confirm("Tem certeza que deseja deletar a chave "+loadedChave.getNome+"?")){
             localStorage.removeItem(selectedChaveId)
         }
+        selectedChaveId = 0
     }
 })
 
-const atualizarButton = document.getElementById("atualizarButton")
-
-atualizarButton.addEventListener("click", function e(event){
+document.getElementById("atualizarButton").addEventListener("click", function e(event){
     if(selectedChaveId!=0){
-        const storedData = localStorage.getItem(selectedChaveId);
+        const storedData = localStorage.getItem(selectedChaveId)
         const loadedChaveString = (storedData ? JSON.parse(storedData) : {})
         const loadedChave = new chave(loadedChaveString.id, loadedChaveString.nome, loadedChaveString.quantidade)
         loadedChave.quantidade = document.getElementById("quantidadeForm").value
         localStorage.setItem(selectedChaveId, JSON.stringify(loadedChave))
+        selectedChaveId = 0
     }
 })
