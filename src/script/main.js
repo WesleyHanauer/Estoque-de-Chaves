@@ -70,7 +70,7 @@ if(localStorage.getItem(0)!=null){
 document.getElementById("dashboard").append(table)
 
 document.body.addEventListener("click", function(e) {
-    if (!e.target.closest("#dashboard tr")) {
+    if (!e.target.closest("#dashboard tr") && !e.target.closest("form")) {
         selectedChaveId = 0;
         const allRows = document.querySelectorAll("#dashboard tr.selected");
         allRows.forEach(row => row.classList.remove("selected"));
