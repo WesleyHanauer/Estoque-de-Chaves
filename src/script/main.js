@@ -51,12 +51,17 @@ if(localStorage.getItem(0)!=null){
             table.appendChild(bodyRow)
             bodyCol1[i].addEventListener("click", function e(event){
                 selectedChaveId = loadedChave.getId
+                const allRows = document.querySelectorAll("#dashboard tr");
+                allRows.forEach(row => row.classList.remove("selected"));
+                bodyRow.classList.add("selected");
             })
             bodyCol2[i].addEventListener("click", function e(event){
                 selectedChaveId = loadedChave.getId
+                const allRows = document.querySelectorAll("#dashboard tr");
+                allRows.forEach(row => row.classList.remove("selected"));
+                bodyRow.classList.add("selected");
             })
         }
-        
     }
 }else{
     localStorage.setItem(0, null)    
@@ -64,10 +69,13 @@ if(localStorage.getItem(0)!=null){
 
 document.getElementById("dashboard").append(table)
 
-/*document.body.addEventListener("click", function e(event){
-    selectedChaveId = 0
-    console.log(selectedChaveId)
-})*/
+document.body.addEventListener("click", function(e) {
+    if (!e.target.closest("#dashboard tr")) {
+        selectedChaveId = 0;
+        const allRows = document.querySelectorAll("#dashboard tr.selected");
+        allRows.forEach(row => row.classList.remove("selected"));
+    }
+});
 
 const confirmarButton = document.getElementById("confirmarButton")
 
@@ -88,6 +96,7 @@ confirmarButton.addEventListener("click", function e(event){
     }else{
         alert("Nome e quantidade devem estar prenchidos!")
     }
+    location.reload()
 })
 
 document.getElementById("deletarButton").addEventListener("click", function e(event){
@@ -99,6 +108,7 @@ document.getElementById("deletarButton").addEventListener("click", function e(ev
             localStorage.removeItem(selectedChaveId)
         }
         selectedChaveId = 0
+        location.reload()
     }
 })
 
@@ -110,5 +120,6 @@ document.getElementById("atualizarButton").addEventListener("click", function e(
         loadedChave.quantidade = document.getElementById("quantidadeForm").value
         localStorage.setItem(selectedChaveId, JSON.stringify(loadedChave))
         selectedChaveId = 0
+        location.reload()
     }
 })
